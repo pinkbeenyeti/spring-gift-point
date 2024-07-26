@@ -19,12 +19,13 @@ import gift.dto.*;
 @Validated
 @RequestMapping("/api/products")
 public class ProductController {
+    private final ProductService productService;
+    private final CategoryService categoryService;
 
-    @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private CategoryService categoryService;
+    public ProductController(ProductService productService, CategoryService categoryService) {
+        this.productService = productService;
+        this.categoryService = categoryService;
+    }
 
     @GetMapping
     public String getAllProducts(Model model, @PageableDefault(size = 3) Pageable pageable) {

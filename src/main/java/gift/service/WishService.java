@@ -22,11 +22,9 @@ public class WishService {
     private final ProductRepository productRepository;
 
     public WishService(WishRepository wishRepository, UserRepository userRepository, ProductRepository productRepository){
-
         this.wishRepository = wishRepository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
-
     }
 
     public void addWishProduct(Long userId, WishRequestDTO wishRequestDTO) {

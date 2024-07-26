@@ -14,11 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OptionService {
-    @Autowired
-    private OptionRepository optionRepository;
+    private final OptionRepository optionRepository;
+    private final ProductService productService;
 
-    @Autowired
-    private ProductService productService;
+    public OptionService(OptionRepository optionRepository, ProductService productService) {
+        this.optionRepository = optionRepository;
+        this.productService = productService;
+    }
 
     public OptionsPageResponseDTO getProductOptions(Long productId, Pageable pageable) {
         Page<Option> optionPage = optionRepository.findAllByProductId(productId, pageable);

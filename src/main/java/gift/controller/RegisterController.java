@@ -21,15 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/members/register")
 public class RegisterController {
-    @Autowired
-    private AuthService authService;
-
-    @Autowired
-    private UserService userService;
-
+    private final AuthService authService;
+    private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    public RegisterController(JwtUtil jwtUtil) {
+    public RegisterController(AuthService authService, UserService userService, JwtUtil jwtUtil) {
+        this.authService = authService;
+        this.userService = userService;
         this.jwtUtil = jwtUtil;
     }
 

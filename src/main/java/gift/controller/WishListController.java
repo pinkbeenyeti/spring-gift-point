@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/wishes")
 public class WishListController {
-    @Autowired
-    WishService wishService;
+    private final WishService wishService;
+    private final ProductService productService;
 
-    @Autowired
-    ProductService productService;
+    public WishListController(WishService wishService, ProductService productService) {
+        this.wishService = wishService;
+        this.productService = productService;
+    }
 
     @GetMapping
     public String getWishlist(@LoginUser User user, Model model, @PageableDefault(size = 3) Pageable pageable) {

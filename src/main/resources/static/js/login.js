@@ -53,3 +53,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         alert(`An error occurred: ${error.message}`);
     });
 });
+
+document.getElementById('api-login-btn').addEventListener('click', function(event) {
+    window.location.href = '/kakao/login';
+});

@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/api/product/options")
 public class OptionController {
-    @Autowired
-    OptionService optionService;
+    private final OptionService optionService;
+
+    public OptionController(OptionService optionService) {
+        this.optionService = optionService;
+    }
 
     @GetMapping("/{id}")
     public String getOptions(@PathVariable(name = "id") Long productId, Model model, @PageableDefault(size = 3) Pageable pageable) {

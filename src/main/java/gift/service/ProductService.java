@@ -6,7 +6,6 @@ import gift.exceptions.CustomException;
 import gift.model.Category;
 import gift.model.Product;
 import gift.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,11 +14,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+    private final CategoryService categoryService;
 
-    @Autowired
-    private CategoryService categoryService;
+    public ProductService(ProductRepository productRepository, CategoryService categoryService) {
+        this.productRepository = productRepository;
+        this.categoryService = categoryService;
+    }
 
     public void createProduct(ProductRequestDTO productRequestDTO) {
         Category category = categoryService.getCategoryById(productRequestDTO.categoryId());

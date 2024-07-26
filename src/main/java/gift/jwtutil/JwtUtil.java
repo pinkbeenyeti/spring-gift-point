@@ -1,5 +1,6 @@
 package gift.jwtutil;
 
+import gift.config.JwtTokenProperties;
 import gift.dto.TokenDTO;
 import gift.dto.UserDTO;
 import io.jsonwebtoken.Jwts;
@@ -12,11 +13,14 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    @Value("${jwt.secretKey}")
-    private String secretKey;
+    private JwtTokenProperties jwtTokenProperties;
+
+    public JwtUtil(JwtTokenProperties jwtTokenProperties) {
+        this.jwtTokenProperties = jwtTokenProperties;
+    }
 
     private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(secretKey.getBytes());
+        return Keys.hmacShaKeyFor(jwtTokenProperties.secretKey().getBytes());
     }
 
     public TokenDTO makeToken(UserDTO userDTO) {
