@@ -27,21 +27,22 @@ public class WishListController {
 
     @GetMapping
     public String getWishlist(@LoginUser User user, Model model, @PageableDefault(size = 3) Pageable pageable) {
-        WishPageResponseDTO wishProducts = wishService.getWishlist(user.getId(), pageable);
-        model.addAttribute("wishProducts", wishProducts);
+        WishPageResponseDTO wishOptions = wishService.getWishlist(user.getId(), pageable);
+        model.addAttribute("wishOptions", wishOptions);
         return "wishlist";
     }
 
-    @GetMapping("/addWishProduct")
-    public String addWishProductPage(@LoginUser User user, Model model, @PageableDefault(size = 3) Pageable pageable) {
+    @GetMapping("/addWishOption")
+    public String addWishOptionPage(@LoginUser User user, Model model, @PageableDefault(size = 3) Pageable pageable) {
         ProductsPageResponseDTO products = productService.getAllProducts(pageable);
         model.addAttribute("products", products);
+
         return "addWishProduct"; // addWishProduct.html로 이동
     }
 
-    @PostMapping("/addWishProduct")
-    public ResponseEntity<String> addWishProduct(@LoginUser User user, @RequestBody WishRequestDTO wishRequestDTO, Model model) {
-        wishService.addWishProduct(user.getId(), wishRequestDTO);
+    @PostMapping("/addWishOption")
+    public ResponseEntity<String> addWishOption(@LoginUser User user, @RequestBody WishRequestDTO wishRequestDTO, Model model) {
+        wishService.addWishOption(user.getId(), wishRequestDTO);
 
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
@@ -49,10 +50,10 @@ public class WishListController {
 
     @DeleteMapping
     public String deleteWishProduct(@LoginUser User user, @RequestBody WishRequestDTO wishRequestDTO, Model model, @PageableDefault(size = 3) Pageable pageable) {
-        wishService.deleteWishProduct(user.getId(), wishRequestDTO.productId());
+        wishService.deleteWishOption(user.getId(), wishRequestDTO.optionId());
 
-        WishPageResponseDTO wishProducts = wishService.getWishlist(user.getId(), pageable);
-        model.addAttribute("wishProducts", wishProducts);
+        WishPageResponseDTO wishOptions = wishService.getWishlist(user.getId(), pageable);
+        model.addAttribute("wishOptions", wishOptions);
 
         return "wishlist";
     }

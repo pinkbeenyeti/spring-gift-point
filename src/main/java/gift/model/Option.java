@@ -41,8 +41,8 @@ public class Option {
         this.product = product;
     }
 
-    public void subtract(int amount) {
-        if  (amount > this.quantity) {
+    public void subtract(Long amount) {
+        if  (amount >= this.quantity) {
             throw CustomException.quantityInvalidException();
         }
         this.quantity -= amount;

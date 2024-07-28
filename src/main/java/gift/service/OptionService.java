@@ -22,12 +22,20 @@ public class OptionService {
         this.productService = productService;
     }
 
+    public OptionsPageResponseDTO getAllOptions(Pageable pageable) {
+        Page<Option> optionPage = optionRepository.findAll(pageable);
+
+        return new OptionsPageResponseDTO(optionPage.getContent(),
+                optionPage.getNumber(),
+                optionPage.getTotalPages());
+    }
+
     public OptionsPageResponseDTO getProductOptions(Long productId, Pageable pageable) {
         Page<Option> optionPage = optionRepository.findAllByProductId(productId, pageable);
 
         return new OptionsPageResponseDTO(optionPage.getContent(),
-                                          optionPage.getNumber(),
-                                          optionPage.getTotalPages());
+                optionPage.getNumber(),
+                optionPage.getTotalPages());
     }
 
     public void createOption(Long productId, OptionRequestDTO optionRequestDTO) {
@@ -38,8 +46,8 @@ public class OptionService {
     }
 
     @Transactional
-    public void subtractOptionQuantity(Long productId, int amount) {
-        Option option = optionRepository.findByProductId(productId)
+    public void subtractOptionQuantity(Long optionId, Long amount) {
+        Option option = optionRepository.findById(optionId)
                 .orElseThrow(CustomException::optionNotFoundException);
 
         option.subtract(amount);

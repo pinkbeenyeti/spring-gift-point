@@ -1,18 +1,17 @@
 package gift.repository;
 
-import gift.model.Product;
+import gift.model.Option;
 import gift.model.User;
 import gift.model.Wish;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-
-import java.util.List;
-
 public interface WishRepository extends JpaRepository<Wish, Long> {
-    @Query("SELECT w.product.id FROM Wish w WHERE w.user.id = :userId")
-    List<Long> findProductIdsByUserId(@Param("userId") Long userId);
+    @Query("SELECT w FROM Wish w JOIN FETCH w.option WHERE w.user = :user")
+    Page<Wish> findAllByUser(@Param("user") User user, Pageable pageable);
 
-    void deleteByUserAndProduct(User user, Product product);
+    void deleteByUserAndOption(User user, Option option);
 }

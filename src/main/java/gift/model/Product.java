@@ -35,9 +35,6 @@ public class Product {
     private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
-    private List<Wish> wishes;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Option> options;
 
     protected Product() {}

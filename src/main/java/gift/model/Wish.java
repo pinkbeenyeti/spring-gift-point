@@ -1,12 +1,6 @@
 package gift.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "wish")
@@ -21,26 +15,24 @@ public class Wish {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @JoinColumn(name = "option_id")
+    private Option option;
 
-    // 기본 생성자
     protected Wish() {
     }
 
-    // 생성자
-    public Wish(User user, Product product) {
+    public Wish(User user, Option option) {
         this.user = user;
-        this.product = product;
+        this.option = option;
     }
 
     public Long getId() { return id; }
 
     public User getUser() { return user; }
 
-    public Product getProduct() { return product; }
+    public Option getOption() { return option; }
 
     public Long getUserId() { return user.getId(); }
 
-    public Long getProductId() { return product.getId(); }
+    public Long getOptionId() { return option.getId(); }
 }

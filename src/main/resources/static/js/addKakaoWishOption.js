@@ -19,14 +19,14 @@ document.getElementById('add-wish-btn').addEventListener('click', function(event
 
 // Function to add a Wish product
 function addWishProduct(temp) {
-    const data = {productId: temp};
+    const data = {optionId: temp};
     console.log(data);
-    fetch(`/wishes/addWishProduct`, {
+    fetch(`/kakao/wish/addWish`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("access_token")
         }
     })
     .then(response => {
@@ -41,11 +41,11 @@ function addWishProduct(temp) {
 }
 
 function returnWishProduct() {
-    fetch(`/wishes`, {
+    fetch(`/kakao/wish`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("access_token")
         }
     })
     .then(response => {
@@ -66,11 +66,11 @@ function returnWishProduct() {
 }
 
 function loadPage(pageNum) {
-    fetch(`/wishes/addWishProduct?page=${pageNum}`, {
+    fetch(`/kakao/wish/addWish?page=${pageNum}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem("token")
+            'Authorization': 'Bearer ' + localStorage.getItem("access_token")
         }
     })
     .then(response => {
