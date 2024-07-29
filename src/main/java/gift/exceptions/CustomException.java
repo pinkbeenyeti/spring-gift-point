@@ -20,19 +20,19 @@ public class CustomException extends RuntimeException{
     }
 
     public static CustomException redundantEmailException() {
-        return new CustomException(ErrorMessage.emailAlreadyExists, HttpStatus.FORBIDDEN);
+        return new CustomException(ErrorMessage.emailAlreadyExists, HttpStatus.UNAUTHORIZED);
     }
 
     public static CustomException userNotFoundException() {
-        return new CustomException(ErrorMessage.emailNotExists, HttpStatus.FORBIDDEN);
+        return new CustomException(ErrorMessage.emailNotExists, HttpStatus.UNAUTHORIZED);
     }
 
     public static CustomException invalidPasswordException() {
-        return new CustomException(ErrorMessage.passwordInvalid, HttpStatus.FORBIDDEN);
+        return new CustomException(ErrorMessage.passwordInvalid, HttpStatus.UNAUTHORIZED);
     }
 
     public static CustomException invalidTokenException() {
-        return new CustomException(ErrorMessage.tokenInvalid, HttpStatus.FORBIDDEN);
+        return new CustomException(ErrorMessage.tokenInvalid, HttpStatus.UNAUTHORIZED);
     }
 
     public static CustomException invalidHeaderException() {
